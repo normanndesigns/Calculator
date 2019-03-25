@@ -1,0 +1,85 @@
+.none{
+	display: none;
+}
+.flex{
+	display: flex;
+}
+.global-wrapper{
+	width: 100vw;
+	min-height: 100vh;
+	display: flex;
+  font-family: 'Open Sans', sans-serif;
+  border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	flex-direction: column;
+}
+.toolbar{
+	width: 100%;
+	height: 25px;
+	align-items: center;
+  display: flex;
+  justify-content: flex-end;
+	border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.toolbar ul{
+    display: flex;
+}
+.toolbar ul li{
+	width: 15px;
+	height: 15px;
+	background-color: red;
+	border-radius: 50%;
+	margin-right: 7px;
+	-webkit-app-region: no-drag;
+}
+.toolbar ul li:nth-of-type(3){
+	background-color: #FF6159;
+}
+.toolbar ul li:nth-of-type(2){
+	background-color: #FFBE2E;
+}
+.toolbar ul li:nth-of-type(1){
+	background-color: #28CA42;
+}
+.toolbar ul li:nth-of-type(1):hover, .toolbar ul li:nth-of-type(2):hover, .toolbar ul li:nth-of-type(3):hover{
+	cursor: pointer;
+}
+/*   Screen   */
+.screen{
+  width: 100vw;
+  height: 12.5vh;
+  border: 0px;
+  outline: none;
+}
+.screen{
+  font-size: 2em;
+  color: #ffffff;
+  padding: 0px 10px;
+  box-sizing: border-box;
+}
+.keyboard{
+	width: 100%;
+	height: calc(100vh - 12.5vh - 25px);
+}
+.keyboard ul{
+	display: flex;
+	flex-wrap: wrap;
+}
+.Smallbuttons, .Largebuttons{
+	display: flex;
+	box-sizing: border-box;
+	width: calc(100vw / 4);
+	height: calc((100vh - 12.5vh - 25px) / 5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #ffffff;
+	font-size: 22px;
+}
+.Largebuttons{
+	width: calc(100vw / 4 * 2);
+}
+.Smallbuttons:hover, .Largebuttons:hover{
+	cursor: pointer;
+}
