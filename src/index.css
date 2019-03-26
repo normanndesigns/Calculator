@@ -4,6 +4,9 @@
 .flex{
 	display: flex;
 }
+.App{
+	overflow: hidden;
+}
 .global-wrapper{
 	width: 100vw;
 	min-height: 100vh;
@@ -48,19 +51,17 @@
 /*   Screen   */
 .screen{
   width: 100vw;
-  height: 12.5vh;
+  height: 15vh;
   border: 0px;
   outline: none;
-}
-.screen{
-  font-size: 2em;
+	font-size: 2em;
   color: #ffffff;
   padding: 0px 10px;
   box-sizing: border-box;
 }
 .keyboard{
 	width: 100%;
-	height: calc(100vh - 12.5vh - 25px);
+	height: calc(100vh - 15vh - 26px);
 }
 .keyboard ul{
 	display: flex;
@@ -70,8 +71,7 @@
 	display: flex;
 	box-sizing: border-box;
 	width: calc(100vw / 4);
-	height: calc((100vh - 12.5vh - 25px) / 5);
-	display: flex;
+	height: calc((100vh - 15vh - 25px) / 5);
 	justify-content: center;
 	align-items: center;
 	color: #ffffff;
