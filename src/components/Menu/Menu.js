@@ -6,21 +6,17 @@ class Menu extends Component {
   render() {
     let maximized = false;
     function closeWindow(){
-        var window = remote.getCurrentWindow();
-        window.close();
+        remote.getCurrentWindow().close();
     }
     function minimizeWindow(){
-        var window = remote.getCurrentWindow();
-        window.minimize();
+        remote.getCurrentWindow().minimize();
     }
     function maximizeWindow(maximize){
-        if(maximized == false){
-            var window = remote.getCurrentWindow();
-            window.maximize();
+        if(maximized === false){
+            remote.getCurrentWindow().maximize();
             maximized = true;
         }else{
-            var window = remote.getCurrentWindow();
-            window.setBounds({
+            remote.getCurrentWindow().setBounds({
                 x: screen.getPrimaryDisplay().size.width/2 - 350/2,
                 y: screen.getPrimaryDisplay().size.height/2 - 500/2,
                 width: 350,
