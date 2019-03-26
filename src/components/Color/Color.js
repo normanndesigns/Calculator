@@ -29,6 +29,6 @@ export const Color = {
     }  
 };
 export const MainColors = {
-  light: Color.purple.light,
-  dark: Color.purple.dark
+  light: Color.red.light,
+  dark: Color.red.dark
 };
