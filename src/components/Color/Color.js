@@ -19,10 +19,6 @@ export const Color = {
       light: 'rgb(214, 48, 49)',
       dark: 'rgb(199, 33, 34)',
     },
-    red: {
-      light: 'rgb(214, 48, 49)',
-      dark: 'rgb(199, 33, 34)',
-    },
     yellow: {
       light: 'rgb(253, 203, 110)',
       dark: 'rgb(238, 188, 95)',
