@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
 import {MainColors} from "../Color/Color";
-const { remote,screen } = window.require('electron');
+const { remote, screen } = window.require('electron');
 
 class Menu extends Component {
-  render() {
-    let maximized = false;
-    function closeWindow(){
+    constructor(){
+        super();
+        this.closeWindow = this.closeWindow.bind(this)
+        this.minimizeWindow = this.minimizeWindow.bind(this)
+        this.maximizeWindow = this.maximizeWindow.bind(this)
+        this.state = {
+            maximized: false
+          }
+    }
+    closeWindow(){
         remote.getCurrentWindow().close();
     }
-    function minimizeWindow(){
+    minimizeWindow(){
         remote.getCurrentWindow().minimize();
     }
-    function maximizeWindow(maximize){
-        if(maximized === false){
+    maximizeWindow(maximize){
+        console.log(this.state.maximized)
+        if(this.state.maximized === false){
             remote.getCurrentWindow().maximize();
-            maximized = true;
+            this.setState({
+                maximized: !this.state.maximized
+            })
         }else{
             remote.getCurrentWindow().setBounds({
                 x: screen.getPrimaryDisplay().size.width/2 - 350/2,
@@ -22,17 +32,20 @@ class Menu extends Component {
                 width: 350,
                 height: 500
             });
-            maximized = false;
+            this.setState({
+                maximized: !this.state.maximized
+            })
         }
     }
-    return (
-        <div className="toolbar" style={{"WebkitAppRegion": "drag", backgroundColor: MainColors.dark}}>
-            <ul>
-                <li id="minimizeBTN" onClick={minimizeWindow}></li><li id="maximizeBTN" onClick={maximizeWindow}></li><li id="closeBTN" onClick={closeWindow}></li>
-            </ul>
-        </div>
-    );
-  }
+    render() {
+        return (
+            <div className="toolbar" style={{"WebkitAppRegion": "drag", backgroundColor: MainColors.dark}}>
+                <ul>
+                    <li id="minimizeBTN" onClick={this.minimizeWindow}></li><li id="maximizeBTN" onClick={this.maximizeWindow}></li><li id="closeBTN" onClick={this.closeWindow}></li>
+                </ul>
+            </div>
+        );
+    }
 }
 
 export default Menu;
