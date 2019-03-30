@@ -61,7 +61,7 @@ class Keyboard extends Component {
     }
   }
   typeOut(){
-    if(this.inputValue.value.substr(this.inputValue.value.length -1) === "=" && this.inputValue.value !== "Color="){ 
+    if(this.inputValue.value.substr(this.inputValue.value.length -1) === "="){ 
       this.calculate(this.state.equation)
       this.inputValue.focus(); 
     }
