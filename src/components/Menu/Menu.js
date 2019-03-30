@@ -19,7 +19,6 @@ class Menu extends Component {
         remote.getCurrentWindow().minimize();
     }
     maximizeWindow(maximize){
-        console.log(this.state.maximized)
         if(this.state.maximized === false){
             remote.getCurrentWindow().maximize();
             this.setState({
