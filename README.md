@@ -1,9 +1,7 @@
 # Calculator
 
 A simple calculator application build with Electron and React.
-
-![](Calculator.png)
-
+<p align="center">![](Calculator.gif)</p>
 ```sh
 $ git clone https://github.com/normanndesigns/Calculator.git
 $ npm install
