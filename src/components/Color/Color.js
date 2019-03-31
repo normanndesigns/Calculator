@@ -8,6 +8,8 @@ export class Color extends Component {
     this.state = {
         colorArray: Object.entries(Colors)
     }
+    localStorage.setItem('light', Colors.red1.light);
+    localStorage.setItem('dark', Colors.red1.dark);
   }
   changeColor(props){
     MainColors["light"] = props.color[1].light
