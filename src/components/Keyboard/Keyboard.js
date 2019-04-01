@@ -11,13 +11,15 @@ class Keyboard extends Component {
     this.typeOut = this.typeOut.bind(this)
     this.calculate = this.calculate.bind(this)
     this.keyPress = this.keyPress.bind(this)
-    
+    this.forceRefresh = this.forceRefresh.bind(this)
+    this.getLastDigits = this.getLastDigits.bind(this)
     this.state = {
       equation: "",
       showC: "flex",
       showCL: "none",
+      tempEquation: "",
       keyTypes: [
-        "c", "cl", "+/-", "%", "/",
+        "c", "cl", "−", "%", "/",
         "7", "8", "9", "*",
         "4", "5", "6", "-",
         "1", "2", "3", "+",
@@ -28,8 +30,28 @@ class Keyboard extends Component {
   componentDidMount(){
     this.inputValue.focus(); 
   }
-  
+  forceRefresh() {
+    this.forceUpdate();
+  }
+  getLastDigits(s) {
+    String.prototype.replaceBetween = function(start, end, what) {
+         return this.substring(0, start) + what + this.substring(end);
+    };
+    var newString = s.replace(/\d+$/, "(" + s.match(/\d+$/)[0] + ")");
+    var lastNum = "(" + s.match(/\d+$/)[0] + ")";
+    var charb4 = newString.substring(newString.indexOf(lastNum), newString.indexOf(lastNum) - 1);
+    if(charb4 === "−"){
+       return newString.replaceBetween(newString.indexOf(lastNum) - 1, newString.length, lastNum).replace("(", "").replace(")", "");
+    }else{
+       return newString.replaceBetween(newString.indexOf(lastNum), newString.length, "−" + lastNum).replace("(", "").replace(")", "");
+    }
+  }
+
+
   calculate(equation){
+    if(equation.includes("−")){
+      equation = equation.replace("−", "-")
+    }
     if(equation !== ""){
       try {
         this.setState({ equation: math.eval(equation) })
@@ -87,6 +109,22 @@ class Keyboard extends Component {
       this.calculate(this.state.equation)
       this.inputValue.focus();
     }
+    else if(data === "−"){
+      if(this.state.equation === ""){
+        this.setState({
+          equation: "−"
+        })
+      }else if(this.state.equation === "−"){
+        this.setState({
+          equation: ""
+        })
+      }else{
+        this.setState({
+          equation: this.getLastDigits(this.inputValue.value)
+        })
+      }
+      this.inputValue.focus();
+    }
     else if(data === "cl"){
       this.setState({ equation: "" })
       this.inputValue.focus();
@@ -99,6 +137,9 @@ class Keyboard extends Component {
   Key(props) {
     if(props.keytype === "cl"){
       return <li className="Smallbuttons" onClick={((e) => this.keyPress(props.keytype))} style={{backgroundColor: MainColors.light, borderColor: MainColors.dark, borderStyle: 'solid', borderWidth: 1, display: this.state.showCL }}>{props.keytype}</li>
+    }
+    else if(props.keytype === "−"){
+      return <li className="Smallbuttons" onClick={((e) => this.keyPress(props.keytype))} style={{backgroundColor: MainColors.light, borderColor: MainColors.dark, borderStyle: 'solid', borderWidth: 1}}>+/-</li>
     }
     else if(props.keytype === "c"){
       return <li className="Smallbuttons" onClick={((e) => this.keyPress(props.keytype))} style={{backgroundColor: MainColors.light, borderColor: MainColors.dark, borderStyle: 'solid', borderWidth: 1, display: this.state.showC }}>{props.keytype}</li>
