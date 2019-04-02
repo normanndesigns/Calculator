@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import queryString from "query-string"
+const { ipcRenderer } = window.require('electron');
 export class Color extends Component {
   constructor(props) {
     super(props)
@@ -8,20 +9,17 @@ export class Color extends Component {
     this.state = {
         colorArray: Object.entries(Colors)
     }
-    localStorage.setItem('light', Colors.red1.light);
-    localStorage.setItem('dark', Colors.red1.dark);
   }
   changeColor(props){
+    ipcRenderer.send('colors',{light: props.color[1].light, dark: props.color[1].dark});
     MainColors["light"] = props.color[1].light
     MainColors["dark"] = props.color[1].dark
-    localStorage.setItem('light', props.color[1].light);
-    localStorage.setItem('dark', props.color[1].dark);
   }
   colorBox(props){
       return <div className="Smallbuttons" style={{ backgroundColor: Colors[props.color[0]].dark}} onClick={(event) => {this.props.forceRefresh(); this.props.reverseShow(); this.changeColor(props)}} > <svg className="roundSVG" id='Layer_1' xmlns='http://www.w3.org/2000/svg' fill={Colors[props.color[0]].light} viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' /></svg></div>
   }
-  render() {   
-    return (
+  render() {
+     return (
       <div className="ColorWrapper">
         {this.state.colorArray.map((key) =>
             <this.colorBox key={"keyID" + key} color={key} />
@@ -129,7 +127,7 @@ export const Colors = {
   }
 };
 export const MainColors = {
-  light: localStorage.getItem('light'),
-  dark: localStorage.getItem('dark')
+  light: queryString.parse(window.location.search).light,
+  dark: queryString.parse(window.location.search).dark
 };
 export default Color
